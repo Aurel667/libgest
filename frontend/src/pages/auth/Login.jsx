@@ -23,7 +23,6 @@ export default function Login() {
     try {
       const res = await apiLogin({ email, password });
       if (res && res.user) {
-        console.log("Login successful:", res.user);
         login(res.user);
         navigate("/books");
       } else {

@@ -32,6 +32,7 @@ export default function Router() {
             }>
                 <Route element={<Layout />}>
                     <Route index element={<Navigate to="/books" replace />} />
+                    <Route path="/books/:id" element={<BookDetails />} />
                     <Route element={<GuestProtected />}>
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
@@ -39,7 +40,6 @@ export default function Router() {
 
                     <Route path="/books" element={<BooksList />} />
                     <Route element={<UserProtected />}>
-                        <Route path="/books/:id" element={<BookDetails />} />
                         <Route path="/lendings" element={<LendingsList />} />
                         <Route path="/lendings/:id" element={<LendingDetails />} />
                         <Route path="/lend" element={<LendingForm />} />

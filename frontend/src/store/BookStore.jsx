@@ -29,18 +29,18 @@ export function BookProvider({ children }) {
                     books: [...prevState.books, book]
                 }));
             },
-        update: async (bookId, payload) => {
+            update: async (bookId, payload) => {
                 const book = await updateBook(bookId, payload);
                 setState((prevState) => ({
                     ...prevState,
-            books: prevState.books.map((b) => (b._id === bookId ? book : b))
+                    books: prevState.books.map((b) => (b._id === bookId ? book : b))
                 }));
             },
             delete: async (bookId) => {
                 await deleteBook(bookId);
                 setState((prevState) => ({
                     ...prevState,
-            books: prevState.books.filter((b) => b._id !== bookId)
+                    books: prevState.books.filter((b) => b._id !== bookId)
                 }));
             }
          }}>

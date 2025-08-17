@@ -14,7 +14,6 @@ export function LendingProvider({ children }) {
     useEffect(() => {
         const fetchLendings = async () => {
             const data = user?.role === "admin" ? await getAllLendings() : await getMyLendings();
-            console.log(data)
             setState((prevState) => ({
                 ...prevState,
                 lendings: Array.isArray(data) ? data : []

@@ -2,6 +2,8 @@ import { useLendingContext } from "../../store/LendingStore";
 import { BookOpen, User, Calendar, Clock, Trash2, AlertCircle } from "lucide-react";
 import Button from "../../components/Button";
 import EmptyState from "../../components/EmptyState";
+import { useState } from "react";
+import { getBookById } from "../../api/books";
 
 export default function AdminLendings() {
   const { lendings, delete: remove } = useLendingContext();
@@ -118,7 +120,14 @@ export default function AdminLendings() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {lendings.map((lending) => {
             const status = getStatusInfo(lending.endDate);
-            
+            const [book, setBook] = useState()
+            getBookById(lending?.bookId)
+            .then(data => {
+              setBook(data)
+            })
+            .catch(error => {
+              setBook({title : "Titre non disponible", author: "Auteur inconnu"})
+            })
             return (
               <div key={lending._id} className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-200">
                 <div className="p-6">
@@ -129,9 +138,9 @@ export default function AdminLendings() {
                     </div>
                     <div className="min-w-0 flex-1">
                       <h3 className="font-semibold text-gray-900 line-clamp-2">
-                        {lending.bookId?.title || 'Titre non disponible'}
+                        {book?.title || 'Titre non disponible'}
                       </h3>
-                      <p className="text-sm text-gray-600 mt-1">{lending.bookId?.author || 'Auteur inconnu'}</p>
+                      <p className="text-sm text-gray-600 mt-1">{book?.author || 'Auteur inconnu'}</p>
                     </div>
                   </div>
 
