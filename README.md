@@ -171,7 +171,7 @@ LiGest2/
 
 ## 🚀 Instructions d'Installation
 
-### Option 1 : Installation Classique
+### Installation Classique
 
 #### Prérequis
 - Node.js >= 16.0.0
@@ -185,6 +185,7 @@ LiGest2/
    cd auth-service && npm install
    cd ../books-service && npm install
    cd ../lending-service && npm install
+   cd ../api-gateway && npm install
    cd ../frontend && npm install
    ```
 
@@ -192,7 +193,7 @@ LiGest2/
 Créer les fichiers `.env` dans chaque service selon les exemples fournis.
 
 #### Lancement
-Ouvrir 4 terminaux et lancer :
+Ouvrir 5 terminaux et lancer :
 ```bash
 # Terminal 1
 cd auth-service && npm run dev
@@ -204,60 +205,11 @@ cd books-service && npm run dev
 cd lending-service && npm run dev
 
 # Terminal 4
+cd api-gateway && npm run dev
+
+# Terminal 5
 cd frontend && npm run dev
 ```
-
-### Option 2 : 🐳 Installation Docker (BONUS)
-
-#### Prérequis
-- Docker Engine >= 20.10
-- Docker Compose >= 2.0
-- 4GB de RAM minimum
-
-#### Démarrage Rapide
-```bash
-# Cloner le projet
-git clone https://github.com/Aurel667/libgest.git
-cd LiGest2
-
-# Lancer avec Docker Compose
-docker-compose up -d
-
-# Voir les logs
-docker-compose logs -f
-```
-
-#### Production Docker
-```bash
-# Configuration
-cp .env.docker .env
-# Éditer .env avec vos valeurs de production
-
-# Lancement production
-docker-compose -f docker-compose.prod.yml up -d
-```
-
-#### Services Docker
-| Service | URL | Description |
-|---------|-----|-------------|
-| Frontend | http://localhost:3000 | Interface React + Nginx |
-| Nginx Proxy | http://localhost:8080 | Reverse proxy (prod) |
-| MongoDB | localhost:27017 | Base de données |
-
-**📖 Documentation Docker complète :** [docker/README.md](./docker/README.md)
-
-### Accès à l'Application
-
-#### Mode Développement
-- Frontend : http://localhost:5173
-- Auth API : http://localhost:5000
-- Books API : http://localhost:5001
-- Lending API : http://localhost:5002
-
-#### Mode Docker
-- Frontend : http://localhost:3000
-- Proxy API : http://localhost:8080
-- MongoDB : localhost:27017
 
 ## 🎯 Fonctionnalités
 
@@ -279,11 +231,8 @@ docker-compose -f docker-compose.prod.yml up -d
 - ✅ **Architecture microservices** avec 3 services distincts
 - ✅ **Interface moderne** avec design system cohérent
 - ✅ **Authentification sécurisée** avec JWT et cookies HTTP-Only
-- ✅ **Base de données séparées** par microservice
-- ✅ **Reverse proxy Nginx** pour la production
 - ✅ **Health checks** et monitoring
+- ✅ **API Gateway** avec proxy
 - ✅ **Documentation technique** complète
 
 ---
-
-**Développé pour l'Architecture Logicielle L3**
