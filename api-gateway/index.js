@@ -8,22 +8,22 @@ app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 
 // Proxy vers chaque microservice
 app.use('/api/auth', createProxyMiddleware({
-  target: 'http://localhost:5000', // auth-service
+  target: process.env.AUTH_SERVICE_URL, // auth-service
   changeOrigin: true,
   pathRewrite: { '^/api/auth': '' },
-  cookieDomainRewrite: "localhost"
+  cookieDomainRewrite: process.env.COOKIE_DOMAIN || "localhost"
 }));
 app.use('/api/books', createProxyMiddleware({
-  target: 'http://localhost:5001', // books-service
+  target: process.env.BOOKS_SERVICE_URL, // books-service
   changeOrigin: true,
   pathRewrite: { '^/api/books': '' },
-  cookieDomainRewrite: "localhost"
+  cookieDomainRewrite: process.env.COOKIE_DOMAIN || "localhost"
 }));
 app.use('/api/lendings', createProxyMiddleware({
-  target: 'http://localhost:5002', // lending-service
-  changeOrigin: true,
-  pathRewrite: { '^/api/lendings': '' },
-  cookieDomainRewrite: "localhost"
+    target: process.env.LENDING_SERVICE_URL, // lending-service
+    changeOrigin: true,
+    pathRewrite: { '^/api/lendings': '' },
+    cookieDomainRewrite: process.env.COOKIE_DOMAIN || "localhost"
 }));
 
 app.listen(4000, () => {
